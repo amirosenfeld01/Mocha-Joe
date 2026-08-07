@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>An invitation for Mr. Yossi Davidson</title>
+<meta name="description" content="Kiddush in honor of Sarina. Shabbos Parshas Re'eh, August 8, 2026.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Italiana&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+/* ---------- EDIT ME ------------------------------------------------
+   Put the address where RSVPs should land, and the guest's name.
+   ------------------------------------------------------------------- */
+:root{
+  --blush:#F6DCE1;
+  --blush-deep:#EBC0CB;
+  --paper:#FFFBFA;
+  --ink:#2A2320;
+  --rose:#96566A;
+  --gold:#C6A15B;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{min-height:100%}
+body{
+  background:var(--blush);
+  background-image:repeating-linear-gradient(90deg,
+     rgba(255,255,255,.55) 0 3px, rgba(255,255,255,0) 3px 11px);
+  color:var(--ink);
+  font-family:'Jost',system-ui,sans-serif;
+  font-weight:300;
+  -webkit-font-smoothing:antialiased;
+  display:flex;align-items:center;justify-content:center;
+  padding:32px 18px 56px;
+  overflow-x:hidden;
+}
+
+/* drifting balloons, borrowed from the card art */
+.sky{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+.balloon{position:absolute;bottom:-160px;width:64px;opacity:.5;animation:rise linear infinite}
+.balloon svg{width:100%;height:auto;display:block}
+@keyframes rise{
+  0%{transform:translateY(0) translateX(0) rotate(-2deg);opacity:0}
+  12%{opacity:.5}
+  100%{transform:translateY(-115vh) translateX(30px) rotate(3deg);opacity:0}
+}
+.b1{left:6%;animation-duration:34s}
+.b2{left:46%;width:44px;animation-duration:46s;animation-delay:-14s}
+.b3{left:82%;width:76px;animation-duration:40s;animation-delay:-26s}
+
+.stage{position:relative;z-index:1;width:100%;max-width:520px}
+
+/* ---------- envelope ---------- */
+.envelope{
+  background:var(--paper);
+  border:1px solid rgba(150,86,106,.18);
+  border-radius:3px;
+  box-shadow:0 24px 60px -28px rgba(90,45,58,.45);
+  padding:0 34px 40px;
+  text-align:center;
+  position:relative;
+  animation:settle .9s cubic-bezier(.2,.7,.3,1) both;
+}
+.flap{
+  height:112px;margin:0 -34px;
+  background:linear-gradient(180deg,#FDF1F3,#F8E3E8);
+  clip-path:polygon(0 0,100% 0,50% 100%);
+  border-bottom:1px solid rgba(150,86,106,.12);
+}
+.cameo{
+  width:132px;height:132px;border-radius:50%;
+  margin:-58px auto 0;position:relative;
+  object-fit:cover;display:block;
+  border:1px solid var(--gold);
+  outline:6px solid var(--paper);
+  box-shadow:0 10px 26px -12px rgba(90,45,58,.6);
+}
+.eyebrow{
+  font-size:10px;letter-spacing:.34em;text-transform:uppercase;
+  color:var(--rose);margin-top:26px;
+}
+.to{
+  font-family:'Italiana',serif;
+  font-size:clamp(30px,8vw,40px);
+  line-height:1.15;margin-top:12px;
+}
+.rule{width:44px;height:1px;background:var(--gold);margin:22px auto;opacity:.7}
+.note{
+  font-size:14px;letter-spacing:.05em;line-height:1.8;color:#6C5B57;
+  max-width:34ch;margin:0 auto;
+}
+.btn{
+  font-family:'Jost',sans-serif;font-size:12px;font-weight:400;
+  letter-spacing:.24em;text-transform:uppercase;
+  padding:15px 30px;border-radius:2px;cursor:pointer;
+  border:1px solid var(--ink);background:var(--ink);color:#fff;
+  transition:transform .18s ease,background .18s ease,color .18s ease;
+}
+.btn:hover{transform:translateY(-2px)}
+.btn.ghost{background:transparent;color:var(--ink);border-color:rgba(42,35,32,.3)}
+.btn.ghost:hover{border-color:var(--ink)}
+.btn:focus-visible,a:focus-visible{outline:2px solid var(--rose);outline-offset:3px}
+.open-btn{margin-top:30px}
+
+/* ---------- card ---------- */
+.card-wrap{display:none}
+.card-wrap.on{display:block;animation:ascend 1.15s cubic-bezier(.16,.84,.31,1) both}
+.card{
+  width:100%;display:block;border-radius:3px;
+  box-shadow:0 30px 70px -30px rgba(90,45,58,.55);
+}
+.hosted{
+  text-align:center;font-size:11px;letter-spacing:.28em;
+  text-transform:uppercase;color:var(--rose);margin:26px 0 8px;
+}
+.guest{
+  font-family:'Italiana',serif;text-align:center;
+  font-size:26px;margin-bottom:26px;
+}
+
+/* ---------- rsvp ---------- */
+.rsvp{
+  background:var(--paper);border:1px solid rgba(150,86,106,.18);
+  border-radius:3px;padding:30px 26px;text-align:center;
+  box-shadow:0 20px 50px -32px rgba(90,45,58,.5);
+}
+.rsvp h2{font-family:'Italiana',serif;font-weight:400;font-size:28px;letter-spacing:.02em}
+.rsvp p{font-size:13.5px;color:#6C5B57;letter-spacing:.04em;margin-top:8px;line-height:1.7}
+.choices{display:flex;flex-direction:column;gap:12px;margin-top:24px}
+.count{margin-top:22px;display:none;align-items:center;justify-content:center;gap:18px}
+.count.on{display:flex}
+.count label{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--rose)}
+.step{
+  width:34px;height:34px;border-radius:50%;cursor:pointer;
+  border:1px solid rgba(42,35,32,.25);background:transparent;
+  font-size:16px;line-height:1;color:var(--ink);
+}
+.step:hover{border-color:var(--ink)}
+.num{font-family:'Italiana',serif;font-size:24px;min-width:28px}
+.sent{display:none}
+.sent.on{display:block;animation:settle .6s ease both}
+.sent .mark{font-family:'Italiana',serif;font-size:44px;color:var(--gold);line-height:1}
+.send-row{margin-top:22px;display:flex;flex-direction:column;gap:10px}
+.tiny{font-size:11px;letter-spacing:.1em;color:#9A8B87;margin-top:18px}
+.tiny a{color:var(--rose)}
+
+@keyframes settle{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes ascend{from{opacity:0;transform:translateY(70px) scale(.97)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+
+<div class="sky" aria-hidden="true">
+  <div class="balloon b1">
+    <svg viewBox="0 0 60 92"><g fill="none" stroke="#fff" stroke-width="1.6"><path d="M30 2c14 0 24 11 24 25 0 15-13 27-24 38C19 54 6 42 6 27 6 13 16 2 30 2z" fill="#fff" fill-opacity=".7"/><path d="M22 4c-4 10-4 40 8 61M38 4c4 10 4 40-8 61"/><rect x="24" y="72" width="12" height="10" rx="2" fill="#fff" fill-opacity=".7"/><path d="M25 65l1 7M35 65l-1 7"/></g></svg>
+  </div>
+  <div class="balloon b2">
+    <svg viewBox="0 0 60 92"><g fill="none" stroke="#fff" stroke-width="1.6"><path d="M30 2c14 0 24 11 24 25 0 15-13 27-24 38C19 54 6 42 6 27 6 13 16 2 30 2z" fill="#fff" fill-opacity=".7"/><path d="M22 4c-4 10-4 40 8 61M38 4c4 10 4 40-8 61"/><rect x="24" y="72" width="12" height="10" rx="2" fill="#fff" fill-opacity=".7"/><path d="M25 65l1 7M35 65l-1 7"/></g></svg>
+  </div>
+  <div class="balloon b3">
+    <svg viewBox="0 0 60 92"><g fill="none" stroke="#fff" stroke-width="1.6"><path d="M30 2c14 0 24 11 24 25 0 15-13 27-24 38C19 54 6 42 6 27 6 13 16 2 30 2z" fill="#fff" fill-opacity=".7"/><path d="M22 4c-4 10-4 40 8 61M38 4c4 10 4 40-8 61"/><rect x="24" y="72" width="12" height="10" rx="2" fill="#fff" fill-opacity=".7"/><path d="M25 65l1 7M35 65l-1 7"/></g></svg>
+  </div>
+</div>
+
+<main class="stage">
+
+  <!-- 1. the envelope -->
+  <section class="envelope" id="envelope">
+    <div class="flap"></div>
+    <img class="cameo" src="yossi.jpg" alt="Yossi Davidson">
+    <p class="eyebrow">An invitation for</p>
+    <h1 class="to">Mr. Yossi Davidson</h1>
+    <div class="rule"></div>
+    <p class="note">Ami &amp; Talia Rosenfeld are celebrating, and they would love for you to be there.</p>
+    <button class="btn open-btn" id="openBtn">Open the invitation</button>
+  </section>
+
+  <!-- 2. the card + rsvp -->
+  <div class="card-wrap" id="cardWrap">
+    <img class="card" src="invitation.jpg" alt="Kiddush in honor of Sarina. Shabbos Parshas Re'eh, August 8, 2026, 12:00 PM. The Rosenfeld backyard, 33 Arrowhead Lane, Lawrence.">
+
+    <p class="hosted">Reserved for</p>
+    <p class="guest">Mr. Yossi Davidson</p>
+
+    <section class="rsvp">
+      <div id="ask">
+        <h2>Will you join us?</h2>
+        <p>Kindly reply by Friday, August 7.</p>
+        <div class="choices">
+          <button class="btn" data-answer="yes">Joyfully attending</button>
+          <button class="btn ghost" data-answer="no">Regretfully cannot</button>
+        </div>
+        <div class="count" id="countRow">
+          <button class="step" id="minus" aria-label="One fewer guest">&minus;</button>
+          <span><label>Guests</label><br><span class="num" id="numGuests">1</span></span>
+          <button class="step" id="plus" aria-label="One more guest">+</button>
+        </div>
+        <div class="send-row" id="sendRow" style="display:none">
+          <button class="btn" id="sendBtn">Send my reply</button>
+        </div>
+      </div>
+
+      <div class="sent" id="sent">
+        <div class="mark">&#10022;</div>
+        <h2 id="sentTitle">Thank you</h2>
+        <p id="sentMsg"></p>
+        <div class="send-row">
+          <button class="btn ghost" id="changeBtn">Change my reply</button>
+        </div>
+      </div>
+
+      <p class="tiny">Saturday, August 8, 2026 &nbsp;&middot;&nbsp; 12:00 PM<br>
+      <a href="https://maps.google.com/?q=33+Arrowhead+Lane,+Lawrence,+NY" target="_blank" rel="noopener">33 Arrowhead Lane, Lawrence, NY</a></p>
+    </section>
+  </div>
+</main>
+
+<script>
+/* ---------- EDIT ME ----------------------------------------------
+   HOST_EMAIL: where the reply gets sent when the guest taps send.
+   GUEST_NAME: who this copy of the invitation is addressed to.
+   ------------------------------------------------------------------ */
+const HOST_EMAIL = "amirosenfeld01@gmail.com";
+const GUEST_NAME = "Yossi Davidson";
+
+/* Paste your Formspree endpoint here to collect replies automatically.
+   Leave it empty and the reply opens as a prefilled email instead.
+   Looks like: https://formspree.io/f/xxxxxxxx                        */
+const FORM_ENDPOINT = "";
+
+const envelope = document.getElementById('envelope');
+const cardWrap = document.getElementById('cardWrap');
+const countRow = document.getElementById('countRow');
+const sendRow  = document.getElementById('sendRow');
+const ask      = document.getElementById('ask');
+const sent     = document.getElementById('sent');
+const numEl    = document.getElementById('numGuests');
+
+let answer = null;
+let guests = 1;
+
+document.getElementById('openBtn').addEventListener('click', () => {
+  envelope.style.display = 'none';
+  cardWrap.classList.add('on');
+  cardWrap.scrollIntoView({behavior:'smooth', block:'start'});
+});
+
+document.querySelectorAll('[data-answer]').forEach(b => {
+  b.addEventListener('click', () => {
+    answer = b.dataset.answer;
+    document.querySelectorAll('[data-answer]').forEach(x => x.classList.add('ghost'));
+    b.classList.remove('ghost');
+    countRow.classList.toggle('on', answer === 'yes');
+    sendRow.style.display = 'flex';
+  });
+});
+
+document.getElementById('plus').addEventListener('click', () => {
+  guests = Math.min(guests + 1, 12); numEl.textContent = guests;
+});
+document.getElementById('minus').addEventListener('click', () => {
+  guests = Math.max(guests - 1, 1); numEl.textContent = guests;
+});
+
+const sendBtn = document.getElementById('sendBtn');
+
+function showConfirmation(yes){
+  document.getElementById('sentTitle').textContent = yes ? "We can't wait" : "You'll be missed";
+  document.getElementById('sentMsg').textContent = yes
+    ? "We have you down for " + guests + (guests === 1 ? " guest" : " guests") + ". See you in the backyard."
+    : "Thank you for letting us know. We'll be thinking of you.";
+  ask.style.display = 'none';
+  sent.classList.add('on');
+}
+
+sendBtn.addEventListener('click', async () => {
+  const yes = answer === 'yes';
+  const subject = "RSVP for Sarina's kiddush - " + GUEST_NAME;
+  const body = yes
+    ? GUEST_NAME + " will be there, with " + guests + (guests === 1 ? " guest" : " guests") + " total. Mazel tov!"
+    : GUEST_NAME + " sadly cannot make it. Mazel tov to you both!";
+
+  if (!FORM_ENDPOINT) {
+    showConfirmation(yes);
+    window.location.href = "mailto:" + HOST_EMAIL
+      + "?subject=" + encodeURIComponent(subject)
+      + "&body=" + encodeURIComponent(body);
+    return;
+  }
+
+  sendBtn.disabled = true;
+  sendBtn.textContent = 'Sending';
+  try {
+    const res = await fetch(FORM_ENDPOINT, {
+      method: 'POST',
+      headers: {'Content-Type':'application/json', 'Accept':'application/json'},
+      body: JSON.stringify({
+        guest: GUEST_NAME,
+        attending: yes ? 'Yes' : 'No',
+        guests: yes ? guests : 0,
+        _subject: subject,
+        message: body
+      })
+    });
+    if (!res.ok) throw new Error('bad response');
+    showConfirmation(yes);
+  } catch (e) {
+    sendBtn.disabled = false;
+    sendBtn.textContent = 'Send my reply';
+    showConfirmation(yes);
+    window.location.href = "mailto:" + HOST_EMAIL
+      + "?subject=" + encodeURIComponent(subject)
+      + "&body=" + encodeURIComponent(body);
+  }
+});
+
+document.getElementById('changeBtn').addEventListener('click', () => {
+  sent.classList.remove('on');
+  ask.style.display = 'block';
+});
+</script>
+</body>
+</html>
